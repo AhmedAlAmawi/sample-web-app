@@ -1,67 +1,8 @@
 "use client";
 import React, { useCallback } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import { usePDF } from "@react-pdf/renderer";
-
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: "column",
-    backgroundColor: "#fff",
-    padding: 30,
-  },
-  header: {
-    fontSize: 24,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  invoiceNumber: {
-    marginTop: 20,
-    marginBottom: 10,
-  },
-  billTo: {
-    marginBottom: 20,
-  },
-  table: {
-    width: "auto",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-  },
-  tableRow: {
-    margin: "auto",
-    flexDirection: "row",
-  },
-  tableColHeader: {
-    width: "50%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    fontWeight: "bold",
-  },
-  tableCol: {
-    width: "50%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-  },
-  tableCell: {
-    margin: "auto",
-    marginTop: 5,
-    fontSize: 10,
-  },
-  totals: {
-    marginTop: 20,
-    borderTopWidth: 2,
-    borderTopStyle: "solid",
-    paddingTop: 10,
-  },
-  // Add more styles as needed
-});
+import PDFDocument from "@/components/pdfDocument";
 
 interface LineItem {
   time: number;
@@ -84,58 +25,9 @@ const PDFViewerComponent = () => {
     (acc: any, item: { price: any }) => acc + (item.price || 0),
     0
   );
-
-  console.log(subtotal);
   const taxAmount = subtotal * taxRate;
   const total = subtotal + taxAmount;
-
-  const MyDocument = (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <Text style={styles.header}>Invoice</Text>
-
-        <View style={styles.invoiceNumber}>
-          <Text>Invoice #: 12345</Text>
-          <Text>Date: {new Date().toLocaleDateString()}</Text>
-        </View>
-
-        <View style={styles.billTo}>
-          <Text>Bill To:</Text>
-          <Text>John Doe</Text>
-          <Text>123 Business Rd.</Text>
-          <Text>Business City, BX 12345</Text>
-        </View>
-
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View style={styles.tableColHeader}>
-              <Text>Description</Text>
-            </View>
-            <View style={styles.tableColHeader}>
-              <Text>Price</Text>
-            </View>
-          </View>
-          {formData.lineItems?.map((item: any, index: number) => (
-            <View key={index} style={styles.tableRow}>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>{item.description}</Text>
-              </View>
-              <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>{item.price}</Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.totals}>
-          <Text>Subtotal: ${subtotal}</Text>
-          <Text>Tax (15%): ${taxAmount}</Text>
-          <Text>Total: ${total}</Text>
-        </View>
-      </Page>
-    </Document>
-  );
-
+  const { MyDocument } = PDFDocument({ formData, subtotal, taxAmount, total });
   const [instance, updateInstance] = usePDF({ document: MyDocument });
 
   const handleBlur = useCallback(() => {
