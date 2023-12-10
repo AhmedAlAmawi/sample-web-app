@@ -6,14 +6,15 @@ interface Colors {
   secondary: string;
 }
 
-interface LineItem {
+export interface LineItem {
+  name: string;
   description: string;
   price: number;
   qty: number;
   total: number;
 }
 
-interface CompanyDetails {
+export interface CompanyDetails {
   name: string;
   address: string;
   phone: string;
@@ -44,19 +45,22 @@ export interface PdfState {
 const initialState: PdfState = {
   lineItems: [
     {
-      description: "Branding Design",
+      name: "Branding Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       price: 1000,
       qty: 1,
       total: 1000,
     },
     {
-      description: "Web Design",
+      name: "Web Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       price: 3000,
       qty: 1,
       total: 3000,
     },
     {
-      description: "Brochure",
+      name: "Brochure",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       price: 80,
       qty: 10,
       total: 800,

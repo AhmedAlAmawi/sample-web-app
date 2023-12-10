@@ -84,9 +84,14 @@ export default function PDFDocument() {
     },
     tableCellDescription: {
       width: "44%",
+      flexWrap: "wrap",
     },
     tableCellPrice: {
       width: "19%",
+    },
+    itemTitle: {
+      fontSize: 12,
+      fontFamily: `${font}-Bold`,
     },
     tableCellQty: {
       width: "10%",
@@ -157,7 +162,7 @@ export default function PDFDocument() {
               <Text
                 style={[styles.tableHeaderText, styles.tableCellDescription]}
               >
-                ITEM DESCRIPTION
+                ITEM
               </Text>
               <Text style={[styles.tableHeaderText, styles.tableCellPrice]}>
                 PRICE
@@ -175,7 +180,8 @@ export default function PDFDocument() {
                   {index + 1}
                 </Text>
                 <Text style={[styles.tableCell, styles.tableCellDescription]}>
-                  {item.description}
+                  <Text style={styles.itemTitle}>{item.name}</Text>
+                  <Text>{`\n${item.description}`}</Text>
                 </Text>
                 <Text style={[styles.tableCell, styles.tableCellPrice]}>
                   {item.price}
