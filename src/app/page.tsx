@@ -5,7 +5,7 @@ const PDFViewerComponent = dynamic(() => import("@/components/pdfEditor"), {
 
 export default async function Home() {
   return (
-    <div>
+    <div className="bg-gray-50">
       <PDFViewerComponent />
     </div>
   );

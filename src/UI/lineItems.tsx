@@ -2,7 +2,6 @@
 import React, { useCallback } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { UseFieldArrayReturn } from "react-hook-form";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
   pdfSlice,
   useSelector,
@@ -10,6 +9,7 @@ import {
   useDispatch,
   SelectedComponent,
 } from "@/lib/redux";
+import Header from "@/UI/header";
 
 export default function LineItems({
   fieldArray,
@@ -36,26 +36,8 @@ export default function LineItems({
 
   return (
     <div className="flex flex-col border-b border-gray-100">
-      <div className="flex flex-row justify-between items-center my-4">
-        <h2 className="text-xl font-bold">Line Items</h2>
-        <button
-          type="button"
-          onClick={() =>
-            dispatch(
-              pdfSlice.actions.setSelectedComponent(
-                selectedComponent !== SelectedComponent.LineItems
-                  ? SelectedComponent.LineItems
-                  : SelectedComponent.NA
-              )
-            )
-          }
-        >
-          <ChevronDownIcon
-            className="h-6 w-6 text-jackOrange"
-            aria-hidden="true"
-          />
-        </button>
-      </div>
+      <Header component="LineItems" title="Line Items" />
+
       <div
         className={classNames(
           "flex flex-col transition-all duration-500 ",
@@ -67,32 +49,54 @@ export default function LineItems({
         <table className="min-w-full table-auto">
           <thead>
             <tr>
-              <th className="p-2 text-sm font-medium leading-6 text-gray-900 text-left">
-                Description
+              <th className="descriptionColumn p-2 text-sm font-medium leading-6 text-gray-900 text-left">
+                Item
               </th>
-              <th className="p-2 text-sm font-medium leading-6 text-gray-900 text-left">
+              <th className="quantityColumn p-2 text-sm font-medium leading-6 text-gray-900 text-left">
                 Quantity
               </th>
-              <th className="p-2 text-sm font-medium leading-6 text-gray-900 text-left">
+              <th className="priceColumn p-2 text-sm font-medium leading-6 text-gray-900 text-left">
                 Price
-              </th>
-              <th className="p-2 text-sm font-medium leading-6 text-gray-900 text-left">
-                Actions
               </th>
             </tr>
           </thead>
           <tbody>
             {fields.map((item, index) => (
-              <tr key={item.id}>
-                <td className="p-2">
-                  <input
-                    className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                    {...register(`lineItems.${index}.description`)}
-                    placeholder="Description"
-                    onBlur={handleBlur}
-                  />
+              <tr
+                key={item.id}
+                className="border-b border-jackOrange border-dashed border-opacity-30"
+              >
+                <td className="descriptionColumn p-2 w-full">
+                  <div className="relative">
+                    <div className="absolute -left-6 top-1 text-jackOrange">
+                      {index + 1}.
+                    </div>
+                    <div>
+                      <input
+                        className=" w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                        {...register(`lineItems.${index}.description`)}
+                        placeholder="Description"
+                        onBlur={handleBlur}
+                      />
+                      <label
+                        htmlFor="description"
+                        className="block text-xs leading-6 text-gray-500 mt-1"
+                      >
+                        Description
+                      </label>
+                      <div className="mt-0.5">
+                        <textarea
+                          className="w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                          {...register(`lineItems.${index}.description`)}
+                          placeholder="Description"
+                          onBlur={handleBlur}
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </td>
-                <td className="p-2">
+
+                <td className="quantityColumn p-2 align-top	">
                   <input
                     className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                     type="number"
@@ -103,7 +107,7 @@ export default function LineItems({
                     onBlur={handleBlur}
                   />
                 </td>
-                <td className="p-2">
+                <td className="priceColumn p-2 align-top	">
                   <input
                     className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                     type="number"
@@ -114,7 +118,7 @@ export default function LineItems({
                     onBlur={handleBlur}
                   />
                 </td>
-                <td className="cursor-pointer ">
+                <td className="cursor-pointer align-top	pt-3 ">
                   <button
                     type="button"
                     className="cursor-pointer	 "

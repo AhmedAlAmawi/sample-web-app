@@ -38,7 +38,7 @@ const PDFViewerComponent = () => {
 
   return (
     <div className="h-screen p-4 grid grid-cols-2 gap-8 max-w-7xl mx-auto">
-      <div className="w-full flex flex-col overflow-auto">
+      <div className="w-full flex flex-col ">
         <form>
           <CompanyDetails companyData={companyData} register={register} />
           <LineItems

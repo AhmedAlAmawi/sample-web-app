@@ -1,6 +1,5 @@
 "use client";
 import React, { useCallback } from "react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import {
   pdfSlice,
@@ -9,7 +8,7 @@ import {
   useDispatch,
   SelectedComponent,
 } from "@/lib/redux";
-
+import Header from "@/UI/header";
 export default function CompanyDetails({
   companyData,
   register,
@@ -26,26 +25,7 @@ export default function CompanyDetails({
 
   return (
     <div className="flex flex-col border-b border-gray-100">
-      <div className="flex flex-row justify-between items-center my-4">
-        <h2 className="text-xl font-bold">Company Details</h2>
-        <button
-          type="button"
-          onClick={() =>
-            dispatch(
-              pdfSlice.actions.setSelectedComponent(
-                selectedComponent !== SelectedComponent.CompanyDetails
-                  ? SelectedComponent.CompanyDetails
-                  : SelectedComponent.NA
-              )
-            )
-          }
-        >
-          <ChevronDownIcon
-            className="h-6 w-6 text-jackOrange"
-            aria-hidden="true"
-          />
-        </button>
-      </div>
+      <Header component="CompanyDetails" title="Company Details" />
       <div
         className={classNames(
           "grid grid-cols-2 gap-6 transition-all duration-500 ",

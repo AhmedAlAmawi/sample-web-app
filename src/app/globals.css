@@ -10,3 +10,21 @@
   visibility: hidden;
   transition: visibility 0s 500ms, opacity 500ms, max-height 500ms;
 }
+
+.descriptionColumn {
+  width: 70%; /* or whatever width suits your layout */
+}
+
+.quantityColumn {
+  width: 10%; /* smaller width for quantity */
+}
+
+.priceColumn {
+  width: 20%; /* adjust as needed */
+}
+
+.itemNumber {
+  position: absolute;
+  left: -20px; /* Adjust as needed */
+  top: 0;
+}
