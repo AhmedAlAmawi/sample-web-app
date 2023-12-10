@@ -9,12 +9,14 @@ import {
   selectDiscountAmount,
   selectFont,
   selectCompanyDetails,
+  selectInvoiceDetails,
 } from "@/lib/redux";
 import { formatDollarValue } from "@/utils/formatters";
 
 export default function PDFDocument() {
   const lineItems = useSelector(selectLineItems);
   const companyDetails = useSelector(selectCompanyDetails);
+  const invoiceDetails = useSelector(selectInvoiceDetails);
   const font = useSelector(selectFont);
   const totalAmount = formatDollarValue(useSelector(selectTotal));
   const subTotalAmount = formatDollarValue(useSelector(selectSubtotal));
@@ -135,23 +137,27 @@ export default function PDFDocument() {
             </View>
             <View>
               <Text style={styles.title}>INVOICE</Text>
-              <Text style={styles.subtitle}>Invoice Number: #1234</Text>
-              <Text style={styles.subtitle}>Date: June 13, 2021</Text>
-              <Text style={styles.subtitle}>Due Date: June 16, 2021</Text>
+              <Text style={styles.subtitle}>
+                Invoice Number: {invoiceDetails.invoiceNumber}
+              </Text>
+              <Text style={styles.subtitle}>Date: {invoiceDetails.date}</Text>
+              <Text style={styles.subtitle}>
+                Due Date: {invoiceDetails.dueDate}
+              </Text>
             </View>
           </View>
           <View style={styles.billToPaymentRow}>
             <View>
               <Text style={styles.title}>BILL TO:</Text>
-              <Text style={styles.subtitle}>Murad Naser</Text>
-              <Text style={styles.subtitle}>123 Anywhere st., Any City</Text>
-              <Text style={styles.subtitle}>123-456-7890</Text>
+              <Text style={styles.subtitle}>{invoiceDetails.billToName}</Text>
+              <Text style={styles.subtitle}>
+                {invoiceDetails.billToAddress}
+              </Text>
+              <Text style={styles.subtitle}>{invoiceDetails.billToPhone}</Text>
             </View>
             <View>
               <Text style={styles.title}>Payment Method</Text>
-              <Text style={styles.subtitle}>Central Bank</Text>
-              <Text style={styles.subtitle}>Samira Hadid</Text>
-              <Text style={styles.subtitle}>123-456-7890</Text>
+              <Text style={styles.subtitle}>{invoiceDetails.paymentTerms}</Text>
             </View>
           </View>
           <View style={styles.table}>

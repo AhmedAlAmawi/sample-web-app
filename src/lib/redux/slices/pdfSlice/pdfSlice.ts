@@ -13,6 +13,15 @@ export interface LineItem {
   qty: number;
   total: number;
 }
+export interface InvoiceDetails {
+  invoiceNumber?: string;
+  date: string;
+  dueDate: string;
+  billToName: string;
+  billToAddress: string;
+  billToPhone: string;
+  paymentTerms: string;
+}
 
 export interface CompanyDetails {
   name: string;
@@ -23,12 +32,14 @@ export interface CompanyDetails {
 export enum SelectedComponent {
   CompanyDetails = "company-details",
   LineItems = "line-items",
+  InvoiceDetails = "invoice-details",
   NA = "NA",
 }
 
 export interface PdfState {
   lineItems: LineItem[];
   companyDetails: CompanyDetails;
+  invoiceDetails: InvoiceDetails;
   total: number;
   subtotal: number;
   tax: number;
@@ -71,6 +82,16 @@ const initialState: PdfState = {
     address: "1234 Main St. Anytown, USA",
     phone: "123-456-7890",
   },
+  invoiceDetails: {
+    invoiceNumber: "#1234",
+    date: "2021-01-01",
+    dueDate: "2021-01-01",
+    billToName: "Ahmed Amawi",
+    billToAddress: "123 Anywhere st., Any City,CA ",
+    billToPhone: "123-456-7890",
+    paymentTerms: "Central Bank \n Samira Hadid \n123-456-7890",
+  },
+
   selectedComponent: SelectedComponent.CompanyDetails,
   total: 5520,
   subtotal: 4800,
@@ -103,6 +124,10 @@ export const pdfSlice = createSlice({
     },
     setCompanyDetails: (state, action: PayloadAction<CompanyDetails>) => {
       state.companyDetails = action.payload;
+      state.lastUpdated = new Date();
+    },
+    setInvoiceDetails: (state, action: PayloadAction<InvoiceDetails>) => {
+      state.invoiceDetails = action.payload;
       state.lastUpdated = new Date();
     },
     setSelectedComponent: (state, action: PayloadAction<SelectedComponent>) => {

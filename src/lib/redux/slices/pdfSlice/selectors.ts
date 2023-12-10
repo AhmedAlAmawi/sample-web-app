@@ -15,3 +15,5 @@ export const selectSelectedComponent = (state: ReduxState) =>
   state.pdf.selectedComponent;
 export const selectCompanyDetails = (state: ReduxState) =>
   state.pdf.companyDetails;
+export const selectInvoiceDetails = (state: ReduxState) =>
+  state.pdf.invoiceDetails;

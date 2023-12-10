@@ -9,6 +9,7 @@ import {
   SelectedComponent,
 } from "@/lib/redux";
 import Header from "@/UI/header";
+import Input from "@/UI/input";
 export default function CompanyDetails({
   companyData,
   register,
@@ -19,8 +20,9 @@ export default function CompanyDetails({
   const dispatch = useDispatch();
   const selectedComponent = useSelector(selectSelectedComponent);
   const handleBlur = useCallback(() => {
-    const clonedLineItems = JSON.parse(JSON.stringify(companyData));
-    dispatch(pdfSlice.actions.setCompanyDetails(clonedLineItems));
+    const clonedCompanyData = JSON.parse(JSON.stringify(companyData));
+    clonedCompanyData.address = clonedCompanyData.address.replace(/\n/g, "\n");
+    dispatch(pdfSlice.actions.setCompanyDetails(clonedCompanyData));
   }, [companyData]);
 
   return (
@@ -34,44 +36,18 @@ export default function CompanyDetails({
             : "max-h-0 opacity-0 visibility-hidden"
         )}
       >
-        <div>
-          <label
-            htmlFor="company-name"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Company Name
-          </label>
-          <div className="mt-2">
-            <input
-              type="text"
-              name="company-name"
-              id="company-name"
-              {...register(`companyDetails.name`)}
-              onBlur={handleBlur}
-              className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-              placeholder="you@example.com"
-            />
-          </div>
-        </div>
-        <div>
-          <label
-            htmlFor="company-phone"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Company Phone
-          </label>
-          <div className="mt-2">
-            <input
-              type="text"
-              name="company-phone"
-              id="company-phone"
-              {...register(`companyDetails.phone`)}
-              onBlur={handleBlur}
-              className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-              placeholder="you@example.com"
-            />
-          </div>
-        </div>
+        <Input
+          title="Company Name"
+          registerName="companyDetails.name"
+          handleBlur={handleBlur}
+          register={register}
+        />
+        <Input
+          title="Company Phone"
+          registerName="companyDetails.phone"
+          handleBlur={handleBlur}
+          register={register}
+        />
         <div className="col-span-2">
           <label
             htmlFor="company-address"

@@ -5,29 +5,35 @@ import {
   useSelector,
   selectLineItems,
   selectCompanyDetails,
+  selectInvoiceDetails,
   selectLastUpdated,
   LineItem,
   CompanyDetails,
+  InvoiceDetails,
 } from "@/lib/redux";
 import { useForm, useFieldArray } from "react-hook-form";
 import { usePDF } from "@react-pdf/renderer";
 import PDFDocument from "@/components/pdfDocument";
 import LineItems from "@/UI/lineItems";
 import CompanyDetailsView from "@/UI/companyDetails";
+import InvoiceDetailsView from "@/UI/invoiceDetails";
 
 interface FormValues {
   lineItems: LineItem[];
   companyDetails: CompanyDetails;
+  invoiceDetails: InvoiceDetails;
 }
 
 const PDFViewerComponent = () => {
   const initialLineItems = useSelector(selectLineItems);
   const initialCompanyDetails = useSelector(selectCompanyDetails);
+  const initialInvoiceDetails = useSelector(selectInvoiceDetails);
   const lastUpdated = useSelector(selectLastUpdated);
   const { register, control, watch, setValue } = useForm<FormValues>({
     defaultValues: {
       lineItems: initialLineItems,
       companyDetails: initialCompanyDetails,
+      invoiceDetails: initialInvoiceDetails,
     },
   });
   const fieldArray = useFieldArray({
@@ -36,6 +42,7 @@ const PDFViewerComponent = () => {
   });
   const formData = watch("lineItems");
   const companyData = watch("companyDetails");
+  const invoiceData = watch("invoiceDetails");
   const { MyDocument } = PDFDocument();
   const [instance, updateInstance] = usePDF({ document: MyDocument });
 
@@ -48,6 +55,7 @@ const PDFViewerComponent = () => {
       <div className="w-full flex flex-col ">
         <form>
           <CompanyDetailsView companyData={companyData} register={register} />
+          <InvoiceDetailsView invoiceData={invoiceData} register={register} />
           <LineItems
             fieldArray={fieldArray}
             formData={formData}
