@@ -1,5 +1,13 @@
 "use client";
 import React, { useCallback } from "react";
+import {
+  counterSlice,
+  useSelector,
+  useDispatch,
+  selectCount,
+  incrementAsync,
+  incrementIfOddAsync,
+} from "@/lib/redux";
 import { useForm, useFieldArray } from "react-hook-form";
 import { usePDF } from "@react-pdf/renderer";
 import PDFDocument from "@/components/pdfDocument";
@@ -14,6 +22,8 @@ interface FormData {
 }
 
 const PDFViewerComponent = () => {
+  const dispatch = useDispatch();
+  const count = useSelector(selectCount);
   const { register, control, watch } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -37,6 +47,38 @@ const PDFViewerComponent = () => {
   return (
     <div className="grid grid-cols-2 gap-4 h-screen max-w-7xl mx-auto">
       <div className="w-full flex flex-co">
+        <div>
+          <div>
+            <button
+              aria-label="Decrement value"
+              onClick={() => dispatch(counterSlice.actions.decrement())}
+            >
+              -
+            </button>
+            <span>{count}</span>
+            <button
+              aria-label="Increment value"
+              onClick={() => dispatch(counterSlice.actions.increment())}
+            >
+              +
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() =>
+                dispatch(counterSlice.actions.incrementByAmount(2))
+              }
+            >
+              Add Amount
+            </button>
+            <button onClick={() => dispatch(incrementAsync(2))}>
+              Add Async
+            </button>
+            <button onClick={() => dispatch(incrementIfOddAsync(2))}>
+              Add If Odd
+            </button>
+          </div>
+        </div>
         <form>
           <h1>Invoice Line Items</h1>
           {fields.map((item, index) => (
