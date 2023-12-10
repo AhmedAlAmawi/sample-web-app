@@ -1,29 +1,19 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
+import FontSelector from "@/UI/fontSelector";
 import {
-  counterSlice,
+  pdfSlice,
   useSelector,
   useDispatch,
-  selectCount,
-  incrementAsync,
-  incrementIfOddAsync,
+  selectLastUpdated,
 } from "@/lib/redux";
 import { useForm, useFieldArray } from "react-hook-form";
 import { usePDF } from "@react-pdf/renderer";
 import PDFDocument from "@/components/pdfDocument";
 
-interface LineItem {
-  time: number;
-  price: number;
-}
-
-interface FormData {
-  lineItems: LineItem[];
-}
-
 const PDFViewerComponent = () => {
   const dispatch = useDispatch();
-  const count = useSelector(selectCount);
+  const lastUpdated = useSelector(selectLastUpdated);
   const { register, control, watch } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -37,49 +27,24 @@ const PDFViewerComponent = () => {
   );
   const taxAmount = subtotal * taxRate;
   const total = subtotal + taxAmount;
-  const { MyDocument } = PDFDocument({ formData, subtotal, taxAmount, total });
+  const { MyDocument } = PDFDocument();
   const [instance, updateInstance] = usePDF({ document: MyDocument });
 
+  useEffect(() => {
+    if (lastUpdated) updateInstance(MyDocument);
+  }, [lastUpdated]);
+
   const handleBlur = useCallback(() => {
+    const clonedLineItems = JSON.parse(JSON.stringify(formData.lineItems));
+    dispatch(pdfSlice.actions.setLineItems(clonedLineItems));
     updateInstance(MyDocument);
   }, [formData]);
 
   return (
     <div className="grid grid-cols-2 gap-4 h-screen max-w-7xl mx-auto">
       <div className="w-full flex flex-co">
-        <div>
-          <div>
-            <button
-              aria-label="Decrement value"
-              onClick={() => dispatch(counterSlice.actions.decrement())}
-            >
-              -
-            </button>
-            <span>{count}</span>
-            <button
-              aria-label="Increment value"
-              onClick={() => dispatch(counterSlice.actions.increment())}
-            >
-              +
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={() =>
-                dispatch(counterSlice.actions.incrementByAmount(2))
-              }
-            >
-              Add Amount
-            </button>
-            <button onClick={() => dispatch(incrementAsync(2))}>
-              Add Async
-            </button>
-            <button onClick={() => dispatch(incrementIfOddAsync(2))}>
-              Add If Odd
-            </button>
-          </div>
-        </div>
         <form>
+          <FontSelector />
           <h1>Invoice Line Items</h1>
           {fields.map((item, index) => (
             <div key={item.id}>
@@ -92,7 +57,9 @@ const PDFViewerComponent = () => {
               <input
                 className="border border-gray-300"
                 type="number"
-                {...register(`lineItems.${index}.price`)}
+                {...register(`lineItems.${index}.price`, {
+                  valueAsNumber: true,
+                })}
                 placeholder="Price"
                 onBlur={handleBlur}
               />

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-const PDFViewerComponent = dynamic(() => import("@/components/pdf"), {
+const PDFViewerComponent = dynamic(() => import("@/components/pdfEditor"), {
   ssr: false,
 });
 

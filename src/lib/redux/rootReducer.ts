@@ -1,6 +1,6 @@
 /* Instruments */
-import { counterSlice } from "./slices";
+import { pdfSlice } from "./slices";
 
 export const reducer = {
-  counter: counterSlice.reducer,
+  pdf: pdfSlice.reducer,
 };
