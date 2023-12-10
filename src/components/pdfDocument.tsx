@@ -48,6 +48,8 @@ export default function PDFDocument() {
     subtitle: {
       fontSize: 16,
       color: "#4B5563",
+      maxWidth: "50%",
+      flexWrap: "wrap",
     },
     table: {
       marginTop: 16,

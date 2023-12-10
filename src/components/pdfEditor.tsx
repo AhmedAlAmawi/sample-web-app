@@ -38,16 +38,16 @@ const PDFViewerComponent = () => {
 
   return (
     <div className="h-screen p-4 grid grid-cols-2 gap-8 max-w-7xl mx-auto">
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col overflow-auto">
         <form>
           <CompanyDetails companyData={companyData} register={register} />
-          <FontSelector />
           <LineItems
             fieldArray={fieldArray}
             formData={formData}
             register={register}
             setValue={setValue}
           />
+          <FontSelector />
         </form>
       </div>
       <div className="w-full">

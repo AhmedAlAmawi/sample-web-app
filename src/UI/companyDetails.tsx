@@ -2,7 +2,13 @@
 import React, { useCallback } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import { pdfSlice, useDispatch } from "@/lib/redux";
+import {
+  pdfSlice,
+  useSelector,
+  selectSelectedComponent,
+  useDispatch,
+  SelectedComponent,
+} from "@/lib/redux";
 
 export default function CompanyDetails({
   companyData,
@@ -12,19 +18,42 @@ export default function CompanyDetails({
   register: any;
 }) {
   const dispatch = useDispatch();
-
+  const selectedComponent = useSelector(selectSelectedComponent);
   const handleBlur = useCallback(() => {
     const clonedLineItems = JSON.parse(JSON.stringify(companyData));
     dispatch(pdfSlice.actions.setCompanyDetails(clonedLineItems));
   }, [companyData]);
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-row justify-between items-center">
-        <h1 className="text-xl font-bold">Company Details</h1>
-        <ChevronDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+    <div className="flex flex-col border-b border-gray-100">
+      <div className="flex flex-row justify-between items-center my-4">
+        <h2 className="text-xl font-bold">Company Details</h2>
+        <button
+          type="button"
+          onClick={() =>
+            dispatch(
+              pdfSlice.actions.setSelectedComponent(
+                selectedComponent !== SelectedComponent.CompanyDetails
+                  ? SelectedComponent.CompanyDetails
+                  : SelectedComponent.NA
+              )
+            )
+          }
+        >
+          <ChevronDownIcon
+            className="h-6 w-6 text-jackOrange"
+            aria-hidden="true"
+          />
+        </button>
       </div>
-      <div className="grid grid-cols-2 gap-6">
+      <div
+        className={classNames(
+          "grid grid-cols-2 gap-6 transition-all duration-500 ",
+          selectedComponent === SelectedComponent.CompanyDetails
+            ? "max-h-screen opacity-100"
+            : "max-h-0 opacity-0 visibility-hidden"
+        )}
+      >
         <div>
           <label
             htmlFor="company-name"
@@ -38,25 +67,6 @@ export default function CompanyDetails({
               name="company-name"
               id="company-name"
               {...register(`companyDetails.name`)}
-              onBlur={handleBlur}
-              className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-              placeholder="you@example.com"
-            />
-          </div>
-        </div>
-        <div>
-          <label
-            htmlFor="company-address"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Company Address
-          </label>
-          <div className="mt-2">
-            <input
-              type="text"
-              name="company-address"
-              id="company-address"
-              {...register(`companyDetails.address`)}
               onBlur={handleBlur}
               className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="you@example.com"
@@ -82,13 +92,32 @@ export default function CompanyDetails({
             />
           </div>
         </div>
+        <div className="col-span-2">
+          <label
+            htmlFor="company-address"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Company Address
+          </label>
+          <div className="mt-2">
+            <textarea
+              type="text"
+              name="company-address"
+              id="company-address"
+              {...register(`companyDetails.address`)}
+              onBlur={handleBlur}
+              className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="you@example.com"
+            />
+          </div>
+        </div>
 
         <div className="col-span-full">
           <label
             htmlFor="cover-photo"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Cover photo
+            Company Logo
           </label>
           <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
             <div className="text-center">
@@ -120,4 +149,8 @@ export default function CompanyDetails({
       </div>
     </div>
   );
+}
+
+function classNames(...classes: any) {
+  return classes.filter(Boolean).join(" ");
 }

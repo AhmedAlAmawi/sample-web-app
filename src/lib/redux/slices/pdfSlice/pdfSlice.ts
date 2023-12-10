@@ -19,6 +19,11 @@ interface CompanyDetails {
   phone: string;
   logoUrl?: string;
 }
+export enum SelectedComponent {
+  CompanyDetails = "company-details",
+  LineItems = "line-items",
+  NA = "NA",
+}
 
 export interface PdfState {
   lineItems: LineItem[];
@@ -31,6 +36,7 @@ export interface PdfState {
   font: string;
   colors: Colors;
   logoUrl: string;
+  selectedComponent: SelectedComponent;
   status: "idle" | "loading" | "failed";
   lastUpdated: Date;
 }
@@ -61,6 +67,7 @@ const initialState: PdfState = {
     address: "1234 Main St. Anytown, USA",
     phone: "123-456-7890",
   },
+  selectedComponent: SelectedComponent.CompanyDetails,
   total: 5520,
   subtotal: 4800,
   tax: 720,
@@ -93,6 +100,9 @@ export const pdfSlice = createSlice({
     setCompanyDetails: (state, action: PayloadAction<CompanyDetails>) => {
       state.companyDetails = action.payload;
       state.lastUpdated = new Date();
+    },
+    setSelectedComponent: (state, action: PayloadAction<SelectedComponent>) => {
+      state.selectedComponent = action.payload;
     },
     setFont: (state, action: PayloadAction<string>) => {
       state.font = action.payload;
