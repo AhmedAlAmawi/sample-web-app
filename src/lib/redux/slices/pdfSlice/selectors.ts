@@ -11,3 +11,5 @@ export const selectDiscountAmount = (state: ReduxState) =>
 export const selectColors = (state: ReduxState) => state.pdf.colors;
 export const selectLogoUrl = (state: ReduxState) => state.pdf.logoUrl;
 export const selectLastUpdated = (state: ReduxState) => state.pdf.lastUpdated;
+export const selectCompanyDetails = (state: ReduxState) =>
+  state.pdf.companyDetails;

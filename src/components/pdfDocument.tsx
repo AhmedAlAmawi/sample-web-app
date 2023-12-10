@@ -8,11 +8,13 @@ import {
   selectTax,
   selectDiscountAmount,
   selectFont,
+  selectCompanyDetails,
 } from "@/lib/redux";
 import { formatDollarValue } from "@/utils/formatters";
 
 export default function PDFDocument() {
   const lineItems = useSelector(selectLineItems);
+  const companyDetails = useSelector(selectCompanyDetails);
   const font = useSelector(selectFont);
   const totalAmount = formatDollarValue(useSelector(selectTotal));
   const subTotalAmount = formatDollarValue(useSelector(selectSubtotal));
@@ -120,9 +122,9 @@ export default function PDFDocument() {
         <View>
           <View style={styles.headerRow}>
             <View>
-              <Text style={styles.title}>Giggling Platypus co.</Text>
-              <Text style={styles.subtitle}>123 Anywhere st., Any City</Text>
-              <Text style={styles.subtitle}>123-456-7890</Text>
+              <Text style={styles.title}>{companyDetails.name}</Text>
+              <Text style={styles.subtitle}>{companyDetails.address}</Text>
+              <Text style={styles.subtitle}>{companyDetails.phone}</Text>
             </View>
             <View>
               <Text style={styles.title}>INVOICE</Text>
@@ -176,9 +178,11 @@ export default function PDFDocument() {
                 <Text style={[styles.tableCell, styles.tableCellPrice]}>
                   {item.price}
                 </Text>
-                <Text style={[styles.tableCell, styles.tableCellQty]}>1</Text>
+                <Text style={[styles.tableCell, styles.tableCellQty]}>
+                  {item.qty}
+                </Text>
                 <Text style={[styles.tableCell, styles.tableCellTotal]}>
-                  {item.price}
+                  {item.total}
                 </Text>
               </View>
             ))}

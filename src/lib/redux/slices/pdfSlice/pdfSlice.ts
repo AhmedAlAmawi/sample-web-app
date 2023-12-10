@@ -13,8 +13,16 @@ interface LineItem {
   total: number;
 }
 
+interface CompanyDetails {
+  name: string;
+  address: string;
+  phone: string;
+  logoUrl?: string;
+}
+
 export interface PdfState {
   lineItems: LineItem[];
+  companyDetails: CompanyDetails;
   total: number;
   subtotal: number;
   tax: number;
@@ -28,10 +36,34 @@ export interface PdfState {
 }
 
 const initialState: PdfState = {
-  lineItems: [],
-  total: 0,
-  subtotal: 0,
-  tax: 0,
+  lineItems: [
+    {
+      description: "Branding Design",
+      price: 1000,
+      qty: 1,
+      total: 1000,
+    },
+    {
+      description: "Web Design",
+      price: 3000,
+      qty: 1,
+      total: 3000,
+    },
+    {
+      description: "Brochure",
+      price: 80,
+      qty: 10,
+      total: 800,
+    },
+  ],
+  companyDetails: {
+    name: "Giggling Platypus co.",
+    address: "1234 Main St. Anytown, USA",
+    phone: "123-456-7890",
+  },
+  total: 5520,
+  subtotal: 4800,
+  tax: 720,
   taxRate: 0.15,
   discountAmount: 0,
   font: "Courier",
@@ -56,6 +88,10 @@ export const pdfSlice = createSlice({
       );
       state.tax = state.subtotal * state.taxRate;
       state.total = state.subtotal + state.tax - state.discountAmount;
+      state.lastUpdated = new Date();
+    },
+    setCompanyDetails: (state, action: PayloadAction<CompanyDetails>) => {
+      state.companyDetails = action.payload;
       state.lastUpdated = new Date();
     },
     setFont: (state, action: PayloadAction<string>) => {
