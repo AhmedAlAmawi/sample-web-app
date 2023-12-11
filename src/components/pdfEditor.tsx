@@ -51,7 +51,7 @@ const PDFViewerComponent = () => {
   }, [lastUpdated]);
 
   return (
-    <div className="h-screen p-4 grid grid-cols-2 gap-8 max-w-7xl mx-auto">
+    <div className="p-4 flex flex-col lg:grid grid-cols-2 gap-8 max-w-7xl mx-auto">
       <div className="w-full flex flex-col ">
         <form>
           <CompanyDetailsView companyData={companyData} register={register} />
@@ -74,7 +74,7 @@ const PDFViewerComponent = () => {
             className="border border-gray-300"
             style={{
               width: "100%",
-              height: "90vh",
+              height: "87vh",
             }}
           />
         )}
