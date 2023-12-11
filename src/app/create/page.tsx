@@ -7,7 +7,7 @@ const PDFViewerComponent = dynamic(() => import("@/components/pdfEditor"), {
 
 export default async function CreatePage() {
   return (
-    <div className="bg-gray-50 max-h-screen h-screen lg:overflow-hidden">
+    <div className="bg-gray-50 max-h-screen h-screen">
       <header className="">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"

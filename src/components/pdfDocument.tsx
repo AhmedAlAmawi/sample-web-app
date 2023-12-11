@@ -43,7 +43,7 @@ export default function PDFDocument() {
       marginTop: 24,
     },
     title: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: "medium",
       fontFamily: `${font}-Bold`,
     },
