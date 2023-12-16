@@ -39,7 +39,7 @@ const PDFViewerComponent = () => {
   const fieldArray = useFieldArray({
     control,
     name: "lineItems",
-  });
+  }) as any;
   const formData = watch("lineItems");
   const companyData = watch("companyDetails");
   const invoiceData = watch("invoiceDetails");
