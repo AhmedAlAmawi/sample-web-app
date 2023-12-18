@@ -159,6 +159,7 @@ export const pdfSlice = createSlice({
     },
     setColors: (state, action: PayloadAction<Colors>) => {
       state.colors = action.payload;
+      state.lastUpdated = new Date();
     },
     setLogoUrl: (state, action: PayloadAction<string>) => {
       state.logoUrl = action.payload;

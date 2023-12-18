@@ -18,6 +18,7 @@ import {
   selectFont,
   selectCompanyDetails,
   selectInvoiceDetails,
+  selectColors,
 } from "@/lib/redux";
 import { formatDollarValue } from "@/utils/formatters";
 
@@ -29,6 +30,7 @@ export default function PDFDocument() {
   const totalAmount = formatDollarValue(useSelector(selectTotal));
   const subTotalAmount = formatDollarValue(useSelector(selectSubtotal));
   const taxAmount = formatDollarValue(useSelector(selectTax));
+  const colors = useSelector(selectColors);
   const discountAmount = formatDollarValue(useSelector(selectDiscountAmount));
 
   Font.register({
@@ -47,7 +49,6 @@ export default function PDFDocument() {
     family: "Roboto-Bold",
     src: "/fonts/Roboto-Bold.ttf",
   });
-  console.log("font", font);
   const styles = StyleSheet.create({
     page: {
       flex: 1,
@@ -69,6 +70,7 @@ export default function PDFDocument() {
       fontSize: 15,
       fontWeight: "medium",
       fontFamily: `${font}-Bold`,
+      color: colors.primary,
     },
     subtitle: {
       fontSize: 13,
@@ -119,6 +121,7 @@ export default function PDFDocument() {
     itemTitle: {
       fontSize: 12,
       fontFamily: `${font}-Bold`,
+      color: colors.primary,
     },
     tableCellQty: {
       width: "12%",

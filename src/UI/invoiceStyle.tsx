@@ -9,6 +9,7 @@ import {
 } from "@/lib/redux";
 import Header from "@/UI/header";
 import FontSelector from "@/UI/fontSelector";
+import ColorSelector from "@/UI/colorSelector";
 
 export default function InvoiceDetails({
   invoiceData,
@@ -33,6 +34,8 @@ export default function InvoiceDetails({
         <div>
           <FontSelector />
         </div>
+        <div />
+        <ColorSelector />
       </div>
     </div>
   );
