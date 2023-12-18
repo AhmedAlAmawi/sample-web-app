@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import FontSelector from "@/UI/fontSelector";
 import {
   useSelector,
@@ -17,6 +17,10 @@ import PDFDocument from "@/components/pdfDocument";
 import LineItems from "@/UI/lineItems";
 import CompanyDetailsView from "@/UI/companyDetails";
 import InvoiceDetailsView from "@/UI/invoiceDetails";
+import { initFirebase } from "@/firebase";
+import { getAuth } from "firebase/auth";
+import { getPremiumStatus } from "@/lib/getPremiumStatus";
+import UpgradeModal from "@/components/upgradeModal";
 
 interface FormValues {
   lineItems: LineItem[];
@@ -25,6 +29,8 @@ interface FormValues {
 }
 
 const PDFViewerComponent = () => {
+  const app = initFirebase();
+  const auth = getAuth(app);
   const initialLineItems = useSelector(selectLineItems);
   const initialCompanyDetails = useSelector(selectCompanyDetails);
   const initialInvoiceDetails = useSelector(selectInvoiceDetails);
@@ -45,16 +51,33 @@ const PDFViewerComponent = () => {
   const invoiceData = watch("invoiceDetails");
   const { MyDocument } = PDFDocument();
   const [instance, updateInstance] = usePDF({ document: MyDocument });
+  const [isPremium, setIsPremium] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     if (lastUpdated) updateInstance(MyDocument);
   }, [lastUpdated]);
 
+  useEffect(() => {
+    const checkPremium = async () => {
+      const newPremiumStatus = auth.currentUser
+        ? await getPremiumStatus(app)
+        : false;
+      setIsPremium(newPremiumStatus);
+    };
+    checkPremium();
+  }, [app, auth.currentUser?.uid]);
   return (
     <div className="p-4 flex flex-col lg:grid grid-cols-2 gap-8 max-w-7xl mx-auto">
+      <UpgradeModal open={openModal} setOpen={setOpenModal} />
       <div className="w-full flex flex-col ">
         <form>
-          <CompanyDetailsView companyData={companyData} register={register} />
+          <CompanyDetailsView
+            isPremium={isPremium}
+            setOpenModal={setOpenModal}
+            companyData={companyData}
+            register={register}
+          />
           <InvoiceDetailsView invoiceData={invoiceData} register={register} />
           <LineItems
             fieldArray={fieldArray}

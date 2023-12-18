@@ -8,13 +8,18 @@ import {
   useDispatch,
   SelectedComponent,
 } from "@/lib/redux";
+import CrownIcon from "./crownIcon";
 import Header from "@/UI/header";
 import Input from "@/UI/input";
 export default function CompanyDetails({
+  isPremium,
   companyData,
+  setOpenModal,
   register,
 }: {
+  isPremium: boolean;
   companyData: any;
+  setOpenModal: any;
   register: any;
 }) {
   const dispatch = useDispatch();
@@ -24,6 +29,7 @@ export default function CompanyDetails({
     clonedCompanyData.address = clonedCompanyData.address.replace(/\n/g, "\n");
     dispatch(pdfSlice.actions.setCompanyDetails(clonedCompanyData));
   }, [companyData]);
+  const premiumStyle = (!isPremium && "pointer-events-none opacity-40") || "";
 
   return (
     <div className="flex flex-col border-b border-gray-100">
@@ -73,9 +79,25 @@ export default function CompanyDetails({
             htmlFor="cover-photo"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Company Logo
+            <div className="flex flex-row items-center justify-between">
+              <span className="flex flex-row items-center gap-2">
+                Company Logo
+                {!isPremium && <CrownIcon />}
+              </span>
+              {!isPremium && (
+                <button
+                  type="button"
+                  className="text-jackOrange hover:text-orange-800 "
+                  onClick={() => setOpenModal(true)}
+                >
+                  Upgrade to Premium
+                </button>
+              )}
+            </div>
           </label>
-          <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+          <div
+            className={`mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ${premiumStyle}`}
+          >
             <div className="text-center">
               <PhotoIcon
                 className="mx-auto h-12 w-12 text-gray-300"
