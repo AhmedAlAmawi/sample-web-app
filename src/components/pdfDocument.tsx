@@ -41,20 +41,19 @@ export default function PDFDocument() {
     headerRow: {
       flexDirection: "row",
       justifyContent: "space-between",
-      marginBottom: 24,
     },
     billToPaymentRow: {
       flexDirection: "row",
       justifyContent: "space-between",
-      marginTop: 24,
+      marginTop: 16,
     },
     title: {
-      fontSize: 18,
+      fontSize: 15,
       fontWeight: "medium",
       fontFamily: `${font}-Bold`,
     },
     subtitle: {
-      fontSize: 16,
+      fontSize: 13,
       color: "#4B5563",
       maxWidth: "50%",
       flexWrap: "wrap",
@@ -89,23 +88,27 @@ export default function PDFDocument() {
     },
     tableCellNo: {
       width: "8%",
+      textAlign: "left",
     },
     tableCellDescription: {
-      width: "44%",
+      width: "42%",
       flexWrap: "wrap",
     },
     tableCellPrice: {
       width: "19%",
+      textAlign: "right",
     },
     itemTitle: {
       fontSize: 12,
       fontFamily: `${font}-Bold`,
     },
     tableCellQty: {
-      width: "10%",
+      width: "12%",
+      textAlign: "right",
     },
     tableCellTotal: {
       width: "19%",
+      textAlign: "right",
     },
     totalsRow: {
       flexDirection: "row",
