@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import FontSelector from "@/UI/fontSelector";
 import {
   useSelector,
   selectLineItems,
@@ -17,6 +16,7 @@ import PDFDocument from "@/components/pdfDocument";
 import LineItems from "@/UI/lineItems";
 import CompanyDetailsView from "@/UI/companyDetails";
 import InvoiceDetailsView from "@/UI/invoiceDetails";
+import InvoiceStyleView from "@/UI/invoiceStyle";
 import { initFirebase } from "@/firebase";
 import { getAuth } from "firebase/auth";
 import { getPremiumStatus } from "@/lib/getPremiumStatus";
@@ -85,7 +85,12 @@ const PDFViewerComponent = () => {
             register={register}
             setValue={setValue}
           />
-          <FontSelector />
+          <InvoiceStyleView
+            fieldArray={fieldArray}
+            formData={formData}
+            register={register}
+            setValue={setValue}
+          />
         </form>
       </div>
       <div className="w-full">

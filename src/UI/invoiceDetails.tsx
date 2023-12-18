@@ -97,7 +97,7 @@ export default function InvoiceDetails({
             htmlFor="company-address"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Payment Terms Address
+            Payment Method
           </label>
           <div className="mt-2">
             <textarea

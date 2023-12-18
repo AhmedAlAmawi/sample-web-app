@@ -33,7 +33,8 @@ export default function CompanyDetails({
     dispatch(pdfSlice.actions.setCompanyDetails(clonedCompanyData));
   }, [companyData, file]);
 
-  const premiumStyle = (!isPremium && "pointer-events-none opacity-40") || "";
+  const premiumStyle =
+    (!isPremium && "pointer-events-none  bg-jackOrange/20 opacity-40") || "";
 
   const handleLogoUpload = async (e) => {
     const file = e.target.files[0];
@@ -74,25 +75,6 @@ export default function CompanyDetails({
           handleBlur={handleBlur}
           register={register}
         />
-        <div className="col-span-2">
-          <label
-            htmlFor="company-address"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Company Address
-          </label>
-          <div className="mt-2">
-            <textarea
-              type="text"
-              name="company-address"
-              id="company-address"
-              {...register(`companyDetails.address`)}
-              onBlur={handleBlur}
-              className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-              placeholder="you@example.com"
-            />
-          </div>
-        </div>
 
         <div className="col-span-full">
           <label
@@ -127,7 +109,7 @@ export default function CompanyDetails({
               <div className="mt-4 flex text-sm leading-6 text-gray-600">
                 <label
                   htmlFor="file-upload"
-                  className="relative cursor-pointer rounded-md bg-white font-semibold text-jackOrange focus-within:outline-none focus-within:ring-2 focus-within:ring-jackOrange focus-within:ring-offset-2 hover:text-jackOrange"
+                  className="relative cursor-pointer rounded-md  font-semibold text-jackOrange focus-within:outline-none focus-within:ring-2 focus-within:ring-jackOrange focus-within:ring-offset-2 hover:text-jackOrange"
                 >
                   <span>Upload a file</span>
                   <input
@@ -144,6 +126,25 @@ export default function CompanyDetails({
                 PNG, JPG, GIF up to 10MB
               </p>
             </div>
+          </div>
+        </div>
+        <div className="col-span-2">
+          <label
+            htmlFor="company-address"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Company Address
+          </label>
+          <div className="mt-2">
+            <textarea
+              type="text"
+              name="company-address"
+              id="company-address"
+              {...register(`companyDetails.address`)}
+              onBlur={handleBlur}
+              className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="you@example.com"
+            />
           </div>
         </div>
       </div>

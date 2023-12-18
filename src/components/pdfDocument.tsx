@@ -174,7 +174,7 @@ export default function PDFDocument() {
               <Text style={styles.subtitle}>{invoiceDetails.billToPhone}</Text>
             </View>
             <View>
-              <Text style={styles.title}>Payment Method</Text>
+              <Text style={styles.title}>PAYMENT METHOD</Text>
               <Text style={styles.subtitle}>{invoiceDetails.paymentTerms}</Text>
             </View>
           </View>
