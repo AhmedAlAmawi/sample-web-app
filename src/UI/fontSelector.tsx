@@ -6,7 +6,8 @@ import { useSelector, useDispatch, pdfSlice, selectFont } from "@/lib/redux";
 const fontOptions = [
   { id: 1, name: "Courier" },
   { id: 2, name: "Helvetica" },
-  { id: 3, name: "Times-Roman" },
+  { id: 3, name: "Oswald" },
+  { id: 3, name: "Roboto" },
 ];
 
 function classNames(...classes: any) {

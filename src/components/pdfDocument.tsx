@@ -6,6 +6,7 @@ import {
   View,
   Document,
   StyleSheet,
+  Font,
 } from "@react-pdf/renderer";
 import {
   useSelector,
@@ -30,6 +31,23 @@ export default function PDFDocument() {
   const taxAmount = formatDollarValue(useSelector(selectTax));
   const discountAmount = formatDollarValue(useSelector(selectDiscountAmount));
 
+  Font.register({
+    family: "Oswald",
+    src: "https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf",
+  });
+  Font.register({
+    family: "Oswald-Bold",
+    src: "/fonts/oswald.bold.ttf",
+  });
+  Font.register({
+    family: "Roboto",
+    src: "/fonts/Roboto-Regular.ttf",
+  });
+  Font.register({
+    family: "Roboto-Bold",
+    src: "/fonts/Roboto-Bold.ttf",
+  });
+  console.log("font", font);
   const styles = StyleSheet.create({
     page: {
       flex: 1,
