@@ -1,5 +1,12 @@
 "use client";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import {
+  Image,
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+} from "@react-pdf/renderer";
 import {
   useSelector,
   selectLineItems,
@@ -27,7 +34,6 @@ export default function PDFDocument() {
     page: {
       flex: 1,
       flexDirection: "column",
-      justifyContent: "space-between",
       padding: 30,
       backgroundColor: "#fff",
       fontFamily: font,
@@ -112,6 +118,7 @@ export default function PDFDocument() {
     },
     footerRow: {
       flexDirection: "row",
+      marginTop: 24,
       justifyContent: "space-between",
     },
     footerTitle: {
@@ -123,12 +130,20 @@ export default function PDFDocument() {
       fontSize: 10,
       color: "#9CA3AF",
     },
+    logo: {
+      height: 50,
+      width: 50,
+      marginBottom: 10,
+    },
   });
 
   const MyDocument = (
     <Document>
       <Page size="A4" style={styles.page}>
         <View>
+          {companyDetails.logo && (
+            <Image src={companyDetails.logo} style={styles.logo} />
+          )}
           <View style={styles.headerRow}>
             <View>
               <Text style={styles.title}>{companyDetails.name}</Text>
@@ -161,7 +176,7 @@ export default function PDFDocument() {
             </View>
           </View>
           <View style={styles.table}>
-            <View style={styles.tableHeader}>
+            <View style={styles.tableHeader} fixed>
               <Text style={[styles.tableHeaderText, styles.tableCellNo]}>
                 NO
               </Text>
@@ -181,7 +196,7 @@ export default function PDFDocument() {
               </Text>
             </View>
             {lineItems.map((item, index) => (
-              <View key={index} style={styles.tableRow}>
+              <View key={index} style={styles.tableRow} wrap={false}>
                 <Text style={[styles.tableCell, styles.tableCellNo]}>
                   {index + 1}
                 </Text>
@@ -200,90 +215,95 @@ export default function PDFDocument() {
                 </Text>
               </View>
             ))}
-
-            <View style={styles.tableRow}>
-              <Text style={styles.tableCellNo}></Text>
-              <Text style={styles.tableCellDescription}></Text>
-              <Text
-                style={[
-                  styles.tableCellEnd,
-                  styles.startingBorder,
-                  styles.tableCellPrice,
-                ]}
-              >
-                Sub Total
-              </Text>
-              <Text
-                style={[
-                  styles.tableCellEnd,
-                  styles.startingBorder,
-                  styles.tableCellQty,
-                ]}
-              >
-                {" "}
-              </Text>
-              <Text
-                style={[
-                  styles.tableCellEnd,
-                  styles.startingBorder,
-                  styles.tableCellTotal,
-                ]}
-              >
-                {subTotalAmount}
-              </Text>
-            </View>
-            <View style={styles.tableRow}>
-              <Text style={styles.tableCellNo}></Text>
-              <Text style={styles.tableCellDescription}></Text>
-              <Text style={[styles.tableCellEnd, styles.tableCellPrice]}>
-                Tax
-              </Text>
-              <Text style={[styles.tableCellEnd, styles.tableCellQty]}> </Text>
-              <Text style={[styles.tableCellEnd, styles.tableCellTotal]}>
-                {taxAmount}
-              </Text>
-            </View>
-            <View style={styles.tableRow}>
-              <Text style={styles.tableCellNo}></Text>
-              <Text style={styles.tableCellDescription}></Text>
-              <Text style={[styles.tableCellEnd, styles.tableCellPrice]}>
-                Discount
-              </Text>
-              <Text style={[styles.tableCellEnd, styles.tableCellQty]}> </Text>
-              <Text style={[styles.tableCellEnd, styles.tableCellTotal]}>
-                {discountAmount}
-              </Text>
-            </View>
-            <View style={styles.tableRow}>
-              <Text style={styles.tableCellNo}></Text>
-              <Text style={styles.tableCellDescription}></Text>
-              <Text
-                style={[
-                  styles.tableCellEnd,
-                  styles.startingBorder,
-                  styles.tableCellPrice,
-                ]}
-              >
-                Total
-              </Text>
-              <Text
-                style={[
-                  styles.tableCellEnd,
-                  styles.startingBorder,
-                  styles.tableCellQty,
-                ]}
-              >
-                {" "}
-              </Text>
-              <Text
-                style={[
-                  styles.tableCellEnd,
-                  styles.startingBorder,
-                  styles.tableCellTotal,
-                ]}
-              >
-                {totalAmount}
-              </Text>
+            <View style={{ marginTop: 12 }} wrap={false}>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCellNo}></Text>
+                <Text style={styles.tableCellDescription}></Text>
+                <Text
+                  style={[
+                    styles.tableCellEnd,
+                    styles.startingBorder,
+                    styles.tableCellPrice,
+                  ]}
+                >
+                  Sub Total
+                </Text>
+                <Text
+                  style={[
+                    styles.tableCellEnd,
+                    styles.startingBorder,
+                    styles.tableCellQty,
+                  ]}
+                >
+                  {" "}
+                </Text>
+                <Text
+                  style={[
+                    styles.tableCellEnd,
+                    styles.startingBorder,
+                    styles.tableCellTotal,
+                  ]}
+                >
+                  {subTotalAmount}
+                </Text>
+              </View>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCellNo}></Text>
+                <Text style={styles.tableCellDescription}></Text>
+                <Text style={[styles.tableCellEnd, styles.tableCellPrice]}>
+                  Tax
+                </Text>
+                <Text style={[styles.tableCellEnd, styles.tableCellQty]}>
+                  {" "}
+                </Text>
+                <Text style={[styles.tableCellEnd, styles.tableCellTotal]}>
+                  {taxAmount}
+                </Text>
+              </View>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCellNo}></Text>
+                <Text style={styles.tableCellDescription}></Text>
+                <Text style={[styles.tableCellEnd, styles.tableCellPrice]}>
+                  Discount
+                </Text>
+                <Text style={[styles.tableCellEnd, styles.tableCellQty]}>
+                  {" "}
+                </Text>
+                <Text style={[styles.tableCellEnd, styles.tableCellTotal]}>
+                  {discountAmount}
+                </Text>
+              </View>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCellNo}></Text>
+                <Text style={styles.tableCellDescription}></Text>
+                <Text
+                  style={[
+                    styles.tableCellEnd,
+                    styles.startingBorder,
+                    styles.tableCellPrice,
+                  ]}
+                >
+                  Total
+                </Text>
+                <Text
+                  style={[
+                    styles.tableCellEnd,
+                    styles.startingBorder,
+                    styles.tableCellQty,
+                  ]}
+                >
+                  {" "}
+                </Text>
+                <Text
+                  style={[
+                    styles.tableCellEnd,
+                    styles.startingBorder,
+                    styles.tableCellTotal,
+                  ]}
+                >
+                  {totalAmount}
+                </Text>
+              </View>
             </View>
           </View>
         </View>

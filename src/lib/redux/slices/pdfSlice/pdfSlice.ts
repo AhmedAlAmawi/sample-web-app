@@ -27,7 +27,7 @@ export interface CompanyDetails {
   name: string;
   address: string;
   phone: string;
-  logoUrl?: string;
+  logo?: string;
 }
 export enum SelectedComponent {
   CompanyDetails = "company-details",
@@ -55,6 +55,111 @@ export interface PdfState {
 
 const initialState: PdfState = {
   lineItems: [
+    {
+      name: "Branding Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 1000,
+      qty: 1,
+      total: 1000,
+    },
+    {
+      name: "Web Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 3000,
+      qty: 1,
+      total: 3000,
+    },
+    {
+      name: "Brochure",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 80,
+      qty: 10,
+      total: 800,
+    },
+    {
+      name: "Branding Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 1000,
+      qty: 1,
+      total: 1000,
+    },
+    {
+      name: "Web Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 3000,
+      qty: 1,
+      total: 3000,
+    },
+    {
+      name: "Brochure",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 80,
+      qty: 10,
+      total: 800,
+    },
+    {
+      name: "Branding Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 1000,
+      qty: 1,
+      total: 1000,
+    },
+    {
+      name: "Web Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 3000,
+      qty: 1,
+      total: 3000,
+    },
+    {
+      name: "Brochure",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 80,
+      qty: 10,
+      total: 800,
+    },
+    {
+      name: "Branding Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 1000,
+      qty: 1,
+      total: 1000,
+    },
+    {
+      name: "Web Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 3000,
+      qty: 1,
+      total: 3000,
+    },
+    {
+      name: "Brochure",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 80,
+      qty: 10,
+      total: 800,
+    },
+    {
+      name: "Branding Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 1000,
+      qty: 1,
+      total: 1000,
+    },
+    {
+      name: "Web Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 3000,
+      qty: 1,
+      total: 3000,
+    },
+    {
+      name: "Brochure",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      price: 80,
+      qty: 10,
+      total: 800,
+    },
     {
       name: "Branding Design",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",

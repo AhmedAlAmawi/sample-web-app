@@ -24,12 +24,32 @@ export default function CompanyDetails({
 }) {
   const dispatch = useDispatch();
   const selectedComponent = useSelector(selectSelectedComponent);
+  const [file, setFile] = React.useState({ name: "", base64: "" });
+
   const handleBlur = useCallback(() => {
     const clonedCompanyData = JSON.parse(JSON.stringify(companyData));
     clonedCompanyData.address = clonedCompanyData.address.replace(/\n/g, "\n");
+    clonedCompanyData.logo = file.base64;
     dispatch(pdfSlice.actions.setCompanyDetails(clonedCompanyData));
-  }, [companyData]);
+  }, [companyData, file]);
+
   const premiumStyle = (!isPremium && "pointer-events-none opacity-40") || "";
+
+  const handleLogoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        const clonedCompanyData = JSON.parse(JSON.stringify(companyData));
+        clonedCompanyData.logo = base64String;
+        const fileObject = { name: file.name, base64: base64String as string };
+        setFile(fileObject);
+        dispatch(pdfSlice.actions.setCompanyDetails(clonedCompanyData));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div className="flex flex-col border-b border-gray-100">
@@ -95,6 +115,7 @@ export default function CompanyDetails({
               )}
             </div>
           </label>
+          <p className="text-xs my-0.5 text-jackOrange">{file.name}</p>
           <div
             className={`mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 ${premiumStyle}`}
           >
@@ -114,6 +135,7 @@ export default function CompanyDetails({
                     name="file-upload"
                     type="file"
                     className="sr-only"
+                    onChange={handleLogoUpload}
                   />
                 </label>
                 <p className="pl-1">or drag and drop</p>
