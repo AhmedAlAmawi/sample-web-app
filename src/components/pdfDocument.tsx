@@ -67,13 +67,13 @@ export default function PDFDocument() {
       marginTop: 16,
     },
     title: {
-      fontSize: 15,
+      fontSize: 13,
       fontWeight: "medium",
       fontFamily: `${font}-Bold`,
       color: colors.primary,
     },
     subtitle: {
-      fontSize: 13,
+      fontSize: 11,
       color: "#4B5563",
       maxWidth: "50%",
       flexWrap: "wrap",
@@ -85,7 +85,7 @@ export default function PDFDocument() {
       flexDirection: "row",
     },
     tableHeaderText: {
-      fontSize: 15,
+      fontSize: 13,
       fontWeight: "bold",
       padding: 8,
     },
@@ -94,12 +94,12 @@ export default function PDFDocument() {
       alignItems: "center",
     },
     tableCell: {
-      fontSize: 13,
+      fontSize: 12,
       padding: 8,
       color: "#4B5563",
     },
     tableCellEnd: {
-      fontSize: 16,
+      fontSize: 14,
       padding: 8,
       color: "#4B5563",
     },
@@ -159,6 +159,10 @@ export default function PDFDocument() {
       width: 50,
       marginBottom: 10,
     },
+    rightAlign: {
+      textAlign: "right",
+    },
+    column: {},
   });
 
   const MyDocument = (
@@ -175,7 +179,7 @@ export default function PDFDocument() {
               <Text style={styles.subtitle}>{companyDetails.phone}</Text>
             </View>
             <View>
-              <Text style={styles.title}>INVOICE</Text>
+              <Text style={[styles.title, styles.rightAlign]}>INVOICE</Text>
               <Text style={styles.subtitle}>
                 Invoice Number: {invoiceDetails.invoiceNumber}
               </Text>
@@ -335,12 +339,8 @@ export default function PDFDocument() {
           <View>
             <Text style={styles.footerTitle}>Term and Conditions:</Text>
             <Text style={styles.footerContent}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              {invoiceDetails.termsAndConditions}
             </Text>
-          </View>
-          <View>
-            <Text style={styles.footerTitle}>Samira Hadid</Text>
-            <Text style={styles.footerContent}>Manager</Text>
           </View>
         </View>
       </Page>

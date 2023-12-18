@@ -21,6 +21,7 @@ export interface InvoiceDetails {
   billToAddress: string;
   billToPhone: string;
   paymentTerms: string;
+  termsAndConditions: string;
 }
 
 export interface CompanyDetails {
@@ -98,6 +99,8 @@ const initialState: PdfState = {
     billToAddress: "123 Anywhere st., Any City,CA ",
     billToPhone: "123-456-7890",
     paymentTerms: "Central Bank \n Samira Hadid \n123-456-7890",
+    termsAndConditions:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
   },
 
   selectedComponent: SelectedComponent.CompanyDetails,

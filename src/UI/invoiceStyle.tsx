@@ -1,24 +1,21 @@
 "use client";
-import React, { useCallback } from "react";
+import React from "react";
 import {
-  pdfSlice,
   useSelector,
   selectSelectedComponent,
-  useDispatch,
   SelectedComponent,
 } from "@/lib/redux";
 import Header from "@/UI/header";
 import FontSelector from "@/UI/fontSelector";
 import ColorSelector from "@/UI/colorSelector";
 
-export default function InvoiceDetails({
-  invoiceData,
-  register,
+export default function InvoiceStyle({
+  isPremium,
+  setOpenModal,
 }: {
-  invoiceData: any;
-  register: any;
+  isPremium: boolean;
+  setOpenModal: any;
 }) {
-  const dispatch = useDispatch();
   const selectedComponent = useSelector(selectSelectedComponent);
   return (
     <div className="flex flex-col border-b border-gray-100">
@@ -34,8 +31,9 @@ export default function InvoiceDetails({
         <div>
           <FontSelector />
         </div>
-        <div />
-        <ColorSelector />
+        <div className="col-span-2">
+          <ColorSelector isPremium={isPremium} setOpenModal={setOpenModal} />
+        </div>
       </div>
     </div>
   );

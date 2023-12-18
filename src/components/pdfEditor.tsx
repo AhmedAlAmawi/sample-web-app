@@ -70,8 +70,8 @@ const PDFViewerComponent = () => {
   return (
     <div className="p-4 flex flex-col lg:grid grid-cols-2 gap-8 max-w-7xl mx-auto">
       <UpgradeModal open={openModal} setOpen={setOpenModal} />
-      <div className="w-full flex flex-col ">
-        <form>
+      <div className="w-full flex flex-col overflow-auto ">
+        <form className="max-h-[80vh]">
           <CompanyDetailsView
             isPremium={isPremium}
             setOpenModal={setOpenModal}
@@ -85,12 +85,7 @@ const PDFViewerComponent = () => {
             register={register}
             setValue={setValue}
           />
-          <InvoiceStyleView
-            fieldArray={fieldArray}
-            formData={formData}
-            register={register}
-            setValue={setValue}
-          />
+          <InvoiceStyleView isPremium={isPremium} setOpenModal={setOpenModal} />
         </form>
       </div>
       <div className="w-full">

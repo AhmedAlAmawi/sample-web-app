@@ -36,7 +36,7 @@ export default function CompanyDetails({
   const premiumStyle =
     (!isPremium && "pointer-events-none  bg-jackOrange/20 opacity-40") || "";
 
-  const handleLogoUpload = async (e) => {
+  const handleLogoUpload = async (e: any) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();

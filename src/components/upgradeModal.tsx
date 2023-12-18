@@ -121,11 +121,14 @@ export default function UpgradeModal({
                           features!
                         </p>
                         <p className="my-2 text-sm font-medium">
-                          Here's what you get with the upgrade:
+                          Here&apos;s what you get with the upgrade:
                         </p>
                         <ul>
                           {FEATURES.map((feature) => (
-                            <li className="flex items-start text-sm mt-2">
+                            <li
+                              key={feature.title}
+                              className="flex items-start text-sm mt-2"
+                            >
                               <span className=" mr-1.5 text-lg">
                                 {feature.icon}{" "}
                               </span>

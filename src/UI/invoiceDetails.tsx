@@ -24,6 +24,8 @@ export default function InvoiceDetails({
       /\n/g,
       "\n"
     );
+    clonedInvoiceData.termsAndConditions =
+      clonedInvoiceData.termsAndConditions.replace(/\n/g, "\n");
     clonedInvoiceData.billToAddress = clonedInvoiceData.billToAddress.replace(
       /\n/g,
       "\n"
@@ -103,6 +105,23 @@ export default function InvoiceDetails({
             <textarea
               type="text"
               {...register(`invoiceDetails.paymentTerms`)}
+              onBlur={handleBlur}
+              className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="you@example.com"
+            />
+          </div>
+        </div>
+        <div className="col-span-2">
+          <label
+            htmlFor="company-address"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Terms & Conditions
+          </label>
+          <div className="mt-2">
+            <textarea
+              type="text"
+              {...register(`invoiceDetails.termsAndConditions`)}
               onBlur={handleBlur}
               className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="you@example.com"

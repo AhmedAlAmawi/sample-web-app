@@ -2,8 +2,17 @@
 import { useState, useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
 import { useDispatch, pdfSlice } from "@/lib/redux";
+import CrownIcon from "./crownIcon";
 
-export default function ColorSelector() {
+export default function ColorSelector({
+  isPremium,
+  setOpenModal,
+}: {
+  isPremium: boolean;
+  setOpenModal: any;
+}) {
+  const premiumStyle =
+    (!isPremium && "pointer-events-none  bg-jackOrange/20 opacity-40") || "";
   const [color, setColor] = useState("#000000");
   const [debouncedColor, setDebouncedColor] = useState(color);
   const dispatch = useDispatch();
@@ -16,6 +25,7 @@ export default function ColorSelector() {
   }, [color]);
 
   useEffect(() => {
+    if (!isPremium) return;
     dispatch(
       pdfSlice.actions.setColors({
         primary: debouncedColor,
@@ -26,10 +36,24 @@ export default function ColorSelector() {
 
   return (
     <div className="w-full">
-      <label className="block text-sm font-medium leading-6 text-gray-900 mb-2">
-        Primary Color
-      </label>
-      <HexColorPicker color={color} onChange={setColor} />
+      <div className="flex flex-row items-center justify-between">
+        <span className="flex flex-row items-center gap-2">
+          Primary Color
+          {!isPremium && <CrownIcon />}
+        </span>
+        {!isPremium && (
+          <button
+            type="button"
+            className="text-jackOrange hover:text-orange-800 "
+            onClick={() => setOpenModal(true)}
+          >
+            Upgrade to Premium
+          </button>
+        )}
+      </div>
+      <div className={`${premiumStyle}`}>
+        <HexColorPicker color={color} onChange={setColor} />
+      </div>
     </div>
   );
 }

@@ -67,11 +67,9 @@ export default function LineItems({
                 className="border-b border-jackOrange border-dashed border-opacity-30"
               >
                 <td className="descriptionColumn p-2 w-full">
-                  <div className="relative">
-                    <div className="absolute -left-6 top-1 text-jackOrange">
-                      {index + 1}.
-                    </div>
-                    <div>
+                  <div className="grid grid-cols-12">
+                    <div className="text-jackOrange mt-1">{index + 1}.</div>
+                    <div className="col-span-11">
                       <input
                         className=" w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                         {...register(`lineItems.${index}.name`)}
