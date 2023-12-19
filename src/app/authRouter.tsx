@@ -20,11 +20,11 @@ const AuthRouter = (props: any) => {
     firebaseUser: User | null | undefined
   ) => {
     if (!isLoading) {
-      if (firebaseUser) {
-        router.push(CREATE_ROUTE);
-      } else {
-        router.push(HOME_ROUTE);
-      }
+      // if (firebaseUser) {
+      //   router.push(CREATE_ROUTE);
+      // } else {
+      //   router.push(HOME_ROUTE);
+      // }
     }
   };
 

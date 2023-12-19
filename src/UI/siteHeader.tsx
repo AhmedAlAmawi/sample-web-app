@@ -19,9 +19,9 @@ export default function SiteHeader() {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
-    if (user) {
-      goToAccount();
-    }
+    // if (user) {
+    //   goToAccount();
+    // }
   };
   const goToAccount = () => {
     router.push("/create");
