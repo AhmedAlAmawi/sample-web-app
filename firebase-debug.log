@@ -1,0 +1,26 @@
+[debug] [2024-01-07T17:35:28.537Z] ----------------------------------------------------------------------
+[debug] [2024-01-07T17:35:28.539Z] Command:       /opt/homebrew/Cellar/node/20.5.1/bin/node /opt/homebrew/bin/firebase deploy --only functions:generatePoem
+[debug] [2024-01-07T17:35:28.539Z] CLI Version:   13.0.2
+[debug] [2024-01-07T17:35:28.539Z] Platform:      darwin
+[debug] [2024-01-07T17:35:28.539Z] Node Version:  v20.5.1
+[debug] [2024-01-07T17:35:28.539Z] Time:          Sun Jan 07 2024 12:35:28 GMT-0500 (Eastern Standard Time)
+[debug] [2024-01-07T17:35:28.539Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-01-07T17:35:28.575Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-01-07T17:35:28.575Z] > authorizing via signed-in user (amawiahmad@gmail.com)
+[debug] [2024-01-07T17:35:28.575Z] [iam] checking project sample-web-ec852 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2024-01-07T17:35:28.576Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sample-web-ec852:testIamPermissions [none]
+[debug] [2024-01-07T17:35:28.576Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sample-web-ec852:testIamPermissions x-goog-quota-user=projects/sample-web-ec852
+[debug] [2024-01-07T17:35:28.576Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sample-web-ec852:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-01-07T17:35:28.837Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sample-web-ec852:testIamPermissions 200
+[debug] [2024-01-07T17:35:28.837Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sample-web-ec852:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-01-07T17:35:28.838Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/sample-web-ec852/serviceAccounts/sample-web-ec852@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2024-01-07T17:35:28.838Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/sample-web-ec852/serviceAccounts/sample-web-ec852@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2024-01-07T17:35:29.115Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/sample-web-ec852/serviceAccounts/sample-web-ec852@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2024-01-07T17:35:29.115Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/sample-web-ec852/serviceAccounts/sample-web-ec852@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'sample-web-ec852'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build

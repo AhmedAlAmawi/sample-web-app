@@ -21,20 +21,12 @@ export default function Home() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Generate your next Invoice in seconds
+              Generate your next Poem in seconds
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              BillLax makes it simple for you to generate your invoices in
-              seconds, completely for free.
+              We make it simple for you to generate your next poem in seconds,
+              completely for free.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link
-                href="/create"
-                className="rounded-md bg-gray-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-              >
-                Create Your Invoice
-              </Link>
-            </div>
           </div>
         </div>
         <div

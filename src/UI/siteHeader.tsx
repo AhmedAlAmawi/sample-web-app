@@ -20,9 +20,9 @@ export default function SiteHeader() {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
-    // if (user) {
-    //   goToAccount();
-    // }
+    if (user) {
+      goToAccount();
+    }
   };
   const goToAccount = () => {
     router.push("/create");
@@ -41,12 +41,12 @@ export default function SiteHeader() {
           </Link>
         </div>
         <div className="flex flex-1 justify-end items-center gap-4">
-          <Link
+          {/* <Link
             href="/create"
             className="rounded-md bg-gray-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
           >
             Create Your Invoice
-          </Link>
+          </Link> */}
           {user ? (
             <ProfileDropdown user={user} signOutRequested={signOutRequested} />
           ) : (

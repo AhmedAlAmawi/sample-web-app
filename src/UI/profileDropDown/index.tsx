@@ -64,21 +64,11 @@ const ProfileDropdown: React.FCC<{
 
         <DropdownMenuItem>
           <Link
-            href="/"
+            href="/create"
             className={"flex h-full w-full items-center space-x-2"}
           >
             <Squares2X2Icon className={"h-5"} />
             <span>Dash</span>
-          </Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem>
-          <Link
-            href={"/settings/profile"}
-            className={"flex h-full w-full items-center space-x-2"}
-          >
-            <Cog8ToothIcon className={"h-5"} />
-            <span>Settings</span>
           </Link>
         </DropdownMenuItem>
 
