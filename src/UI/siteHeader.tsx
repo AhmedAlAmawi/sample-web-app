@@ -12,6 +12,7 @@ export default function SiteHeader() {
   const router = useRouter();
   const app = initFirebase();
   const auth = getAuth(app);
+  console.log(auth);
   const signOutRequested = () => auth.signOut();
   const provider = new GoogleAuthProvider();
   const [user] = useAuthState(auth);
